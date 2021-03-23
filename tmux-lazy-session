@@ -1,4 +1,17 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
 SESSION_NAME="vscode`pwd | md5`"
 
-tmux attach-session -d -t $SESSION_NAME || tmux new-session -s $SESSION_NAME
+while getopts n:k flag
+do
+    case "${flag}" in
+        n) SESSION_NAME=${OPTARG};;
+        k) KILL_SESSION=1;;
+    esac
+done
+
+if [[ KILL_SESSION ]]; then
+  tmux kill-session -t $SESSION_NAME
+else
+  tmux attach-session -d -t $SESSION_NAME || tmux new-session -s $SESSION_NAME
+fi
