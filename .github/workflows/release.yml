@@ -1,0 +1,19 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  formula:
+    name: Update Homebrew formula
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update the Homebrew formula with latest release
+        uses: NSHipster/update-homebrew-formula-action@main
+        with:
+          repository: ingara/tmux-lazy-session
+          tap: ingara/homebrew-tmux-lazy-session
+          formula: tmux-lazy-session.rb
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
