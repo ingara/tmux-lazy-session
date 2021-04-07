@@ -1,19 +1,25 @@
 #!/usr/bin/env bash
 
-SESSION_NAME="vscode`pwd | md5`"
+PWD_HASH=`pwd | md5`
+SESSION_PREFIX="tls"
 KILL_SESSION=0
 
-while getopts ":kn:" flag
+while getopts ":kn:p:" flag
 do
     case $flag in
         n)
           SESSION_NAME=${OPTARG}
+          ;;
+        p)
+          SESSION_PREFIX=${OPTARG}
           ;;
         k)
           KILL_SESSION=1
           ;;
     esac
 done
+
+SESSION_NAME="${SESSION_NAME:="$SESSION_PREFIX$PWD_HASH"}"
 
 if [[ $KILL_SESSION -eq 1 ]]; then
   tmux kill-session -t $SESSION_NAME
