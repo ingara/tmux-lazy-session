@@ -5,10 +5,17 @@ on:
     branches:
       - main
 
-env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/su-se-framover:${{ github.sha }}
-
 jobs:
+  build_and_test:
+    name: Rust project
+    runs-on: macos-11.0
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: cargo build --release --all-features
+
   generate-draft-release:
     name: Generate/update draft release
     runs-on: ubuntu-latest
