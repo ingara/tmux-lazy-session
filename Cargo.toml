@@ -2,6 +2,12 @@
 name = "tmux-lazy-session"
 version = "0.1.0"
 authors = ["Ingar Almklov <ingara@gmail.com>"]
+description = "Tmux sessions for lazy people"
+readme = "README.md"
+homepage = "https://github.com/ingara/tmux-lazy-session"
+repository = "https://github.com/ingara/tmux-lazy-session"
+keywords = ["cli", "tmux"]
+categories = ["command-line-utilities"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
