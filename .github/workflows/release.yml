@@ -20,7 +20,7 @@ jobs:
 
   bottle_macos_big_sur:
     name: Build and distribute Homebrew bottle for macOS Big Sur
-    runs-on: macos-11.0
+    runs-on: macos-11
     needs: [formula]
     steps:
       - name: Build a bottle using Homebrew
