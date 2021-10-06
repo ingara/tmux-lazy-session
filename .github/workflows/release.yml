@@ -20,7 +20,7 @@ jobs:
 
   bottle_macos_big_sur:
     name: Build and distribute Homebrew bottle for macOS Big Sur
-    runs-on: macos-10.15
+    runs-on: macos-11
     needs: [formula]
     steps:
       - name: Build a bottle using Homebrew
@@ -34,8 +34,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./tmux-lazy-session--${{ github.event.release.tag_name }}.big_sur.bottle.1.tar.gz
-          asset_name: tmux-lazy-session-${{ github.event.release.tag_name }}.big_sur.bottle.1.tar.gz
+          asset_path: ./tmux-lazy-session--${{ github.event.release.tag_name }}.big_sur.bottle.tar.gz
+          asset_name: tmux-lazy-session-${{ github.event.release.tag_name }}.big_sur.bottle.tar.gz
           asset_content_type: application/gzip
 
   update_formula_bottle:
