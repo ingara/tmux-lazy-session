@@ -32,7 +32,7 @@ struct Cli {
 
 fn main() -> Result<()> {
   let args = Cli::from_args();
-  env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+  env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("error")).init();
 
   let pwd = std::env::current_dir().with_context(|| "Error getting pwd")?;
   let pwd_str = pwd_as_string(pwd)?;
