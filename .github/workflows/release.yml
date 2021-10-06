@@ -34,8 +34,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./tmux-lazy-session--${{ github.event.release.tag_name }}.big_sur.bottle.tar.gz
-          asset_name: tmux-lazy-session-${{ github.event.release.tag_name }}.big_sur.bottle.tar.gz
+          asset_path: ./tmux-lazy-session--${{ github.event.release.tag_name }}.big_sur.bottle.1.tar.gz
+          asset_name: tmux-lazy-session-${{ github.event.release.tag_name }}.big_sur.bottle.1.tar.gz
           asset_content_type: application/gzip
 
   update_formula_bottle:
