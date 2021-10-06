@@ -5,6 +5,5 @@
 ## Installation
 
 ```sh
-$ brew tap ingara/tmux-lazy-session
-$ brew install tmux-lazy-session
+$ brew install ingara/formulae/tmux-lazy-session
 ```
