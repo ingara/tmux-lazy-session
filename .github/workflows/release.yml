@@ -18,7 +18,7 @@ jobs:
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
-  bottle_macos_big_sur:
+  bottle_macos_monterey:
     name: Build and distribute Homebrew bottle for macOS Big Sur
     runs-on: macos-12
     needs: [formula]
@@ -34,15 +34,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./tmux-lazy-session--${{ github.event.release.tag_name }}.big_sur.bottle.1.tar.gz
-          asset_name: tmux-lazy-session-${{ github.event.release.tag_name }}.big_sur.bottle.1.tar.gz
+          asset_path: ./tmux-lazy-session--${{ github.event.release.tag_name }}.monterey.bottle.1.tar.gz
+          asset_name: tmux-lazy-session-${{ github.event.release.tag_name }}.monterey.bottle.1.tar.gz
           asset_content_type: application/gzip
 
   update_formula_bottle:
     name: Update the Homebrew formula again with bottle
     runs-on: ubuntu-latest
     needs:
-      - bottle_macos_big_sur
+      - bottle_macos_monterey
     steps:
       - uses: NSHipster/update-homebrew-formula-action@main
         with:
