@@ -24,10 +24,6 @@ struct Cli {
   /// Custom session name. Will be used literally and therefore override prefix.
   #[structopt(short, long)]
   name: Option<String>,
-
-  /// Verbose logging
-  #[structopt(short, long)]
-  verbose: bool,
 }
 
 fn main() -> Result<()> {
@@ -38,12 +34,23 @@ fn main() -> Result<()> {
   let pwd_str = pwd_as_string(pwd)?;
   debug!("pwd: `{}`", pwd_str);
 
+  let top_level_dir_name = pwd_str
+    .rsplit_terminator("/")
+    .next()
+    .map(|s| s.to_string());
+
+  debug!("top_level_dir_name: `{:?}`", top_level_dir_name);
+
   let hash_str = short_hash(&pwd_str);
   debug!("hash: `{}`", hash_str);
 
   let session_name = match args.name {
     Some(name) => name,
-    None => args.prefix + &hash_str,
+    None => build_session_name(
+      args.prefix,
+      top_level_dir_name,
+      hash_str
+    )
   };
 
   debug!("session name: `{}`", session_name);
@@ -58,6 +65,15 @@ fn main() -> Result<()> {
   };
 
   Ok(())
+}
+
+fn build_session_name(prefix: String, dir: Option<String>, hash: String) -> String {
+  let v = vec![Some(prefix), dir, Some(hash)];
+  return v
+    .into_iter()
+    .flatten()
+    .collect::<Vec<String>>()
+    .join("-")
 }
 
 fn pwd_as_string(pwd: PathBuf) -> Result<String> {
